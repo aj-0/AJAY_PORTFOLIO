@@ -410,6 +410,19 @@
 
         .section-title span { color: var(--primary); }
 
+        /* Certifications sub-heading note (small + black, sits right under the title) */
+        #certificationsContent .section-title { margin-bottom: 0.5rem; }
+
+        .cert-note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #000000;
+            font-weight: 400;
+            font-style: italic;
+            margin-top: 0;
+            margin-bottom: 2.5rem;
+        }
+
         .close-btn {
             position: fixed;
             top: 80px;
@@ -443,8 +456,8 @@
         @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; } }
 
         /* ===== SKILLS ===== */
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; align-items: start; }
-        .skill-card { background: var(--card); padding: 1.8rem; border-radius: 12px; border: 1.5px solid var(--border); transition: all 0.3s ease; box-shadow: var(--shadow-sm); height: fit-content; }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; align-items: stretch; }
+        .skill-card { background: var(--card); padding: 1.8rem; border-radius: 12px; border: 1.5px solid var(--border); transition: all 0.3s ease; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; height: 100%; }
         .skill-card:hover { border-color: var(--primary); box-shadow: var(--shadow-md); transform: translateY(-4px); }
         .skill-icon { font-size: 2.2rem; margin-bottom: 0.8rem; }
         .skill-card h4 { color: var(--primary); margin-bottom: 0.7rem; font-size: 1.05rem; font-weight: 700; }
@@ -1246,6 +1259,7 @@ To build a career in Embedded Software Development by gaining practical experien
     <!-- CERTIFICATIONS SECTION -->
     <div id="certificationsContent" class="content-section">
         <h2 class="section-title">My <span>Certifications</span></h2>
+        <p class="cert-note">(Certifications are used to reinforce my learning, not define my skills.)</p>
         <div id="certsGrid" class="certs-grid"></div>
     </div>
 
@@ -1332,7 +1346,7 @@ To build a career in Embedded Software Development by gaining practical experien
                 <a href="https://github.com/aj-0" target="_blank" class="contact-link">💻 GitHub</a>
             </div>
             <div class="contact-info">
-                <strong>Ajay C</strong> &nbsp;·&nbsp; +91 8608334383<br>
+                <strong>Ajay C</strong> &
                 Tiruppur, Tamil Nadu &nbsp;·&nbsp; ajay360x@gmail.com
             </div>
         </div>
