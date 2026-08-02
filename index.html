@@ -443,8 +443,8 @@
         @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; } }
 
         /* ===== SKILLS ===== */
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
-        .skill-card { background: var(--card); padding: 1.8rem; border-radius: 12px; border: 1.5px solid var(--border); transition: all 0.3s ease; box-shadow: var(--shadow-sm); }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; align-items: start; }
+        .skill-card { background: var(--card); padding: 1.8rem; border-radius: 12px; border: 1.5px solid var(--border); transition: all 0.3s ease; box-shadow: var(--shadow-sm); height: fit-content; }
         .skill-card:hover { border-color: var(--primary); box-shadow: var(--shadow-md); transform: translateY(-4px); }
         .skill-icon { font-size: 2.2rem; margin-bottom: 0.8rem; }
         .skill-card h4 { color: var(--primary); margin-bottom: 0.7rem; font-size: 1.05rem; font-weight: 700; }
@@ -653,7 +653,9 @@
 
         .project-info { padding: 1.3rem; }
         .project-title { font-size: 1.05rem; font-weight: 700; color: var(--primary); margin-bottom: 0.4rem; }
-        .project-caption { font-size: 0.9rem; color: var(--muted); line-height: 1.5; }
+        .project-caption { font-size: 0.9rem; color: var(--muted); line-height: 1.5; margin-bottom: 0.9rem; }
+        .project-info .tech-list { margin-top: 0; gap: 0.4rem; }
+        .project-info .tech-badge { padding: 0.25rem 0.65rem; font-size: 0.72rem; font-weight: 600; }
 
         /* Detail view */
         .project-detail { background: var(--card); padding: 2.5rem; border-radius: 12px; max-width: 860px; margin: 0 auto; box-shadow: var(--shadow-md); }
@@ -684,6 +686,160 @@
         .certs-list { display: flex; flex-direction: column; gap: 0.55rem; margin-top: 1rem; }
         .cert-item { display: flex; align-items: center; gap: 0.6rem; font-size: 0.9rem; color: var(--muted); }
         .cert-item::before { content: '🏅'; font-size: 1rem; flex-shrink: 0; }
+
+        /* ===== CERTIFICATIONS ===== */
+        .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-card {
+            background: var(--card);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1.5px solid #E4E7EC;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .cert-thumb {
+            width: 100%;
+            height: 170px;
+            background: #F0F2F5;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cert-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.35s ease;
+        }
+
+        .cert-card:hover .cert-thumb img { transform: scale(1.05); }
+
+        .cert-thumb::after {
+            content: '🔍 View';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(0deg, rgba(15,110,86,0.88), transparent);
+            color: white;
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 1.6rem 0.9rem 0.5rem;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        .cert-card:hover .cert-thumb::after { opacity: 1; }
+
+        .cert-body { padding: 1.2rem 1.3rem 1.4rem; }
+
+        .cert-issuer {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.4rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .cert-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.4;
+        }
+
+        /* Lightbox for enlarged certificate image */
+        .cert-lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15,20,25,0.88);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            cursor: zoom-out;
+        }
+
+        .cert-lightbox.active { display: flex; }
+
+        .cert-lightbox img {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .cert-lightbox-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            color: white;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        /* ===== RESOURCES ===== */
+        .resources-box {
+            background: var(--card);
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 1.2rem 1.5rem;
+        }
+        .resource-item {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            padding: 0.75rem 0.4rem;
+            border-bottom: 1px solid var(--border);
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.2s ease;
+            border-radius: 6px;
+        }
+        .resource-item:last-child { border-bottom: none; }
+        .resource-item:hover { background: var(--bg); color: var(--primary); padding-left: 0.7rem; }
+        .resource-index {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .resource-name {
+            flex: 1;
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+        .resource-arrow { color: var(--muted); font-size: 0.85rem; flex-shrink: 0; }
+        .resource-item:hover .resource-arrow { color: var(--primary); }
 
         /* ===== CONTACT ===== */
         .contact-content { background: var(--card); padding: 3rem; border-radius: 12px; max-width: 560px; margin: 0 auto; box-shadow: var(--shadow-md); text-align: center; }
@@ -732,6 +888,8 @@
             <button class="nav-btn" onclick="showContent('about')">About</button>
             <button class="nav-btn" onclick="showContent('skills')">Skills</button>
             <button class="nav-btn" onclick="showContent('projects')">Projects</button>
+            <button class="nav-btn" onclick="showContent('certifications')">Certifications</button>
+            <button class="nav-btn" onclick="showContent('resources')">Resources</button>
             <button class="nav-btn" onclick="showContent('contact')">Contact</button>
         </nav>
     </header>
@@ -819,23 +977,6 @@
             </div>
         </div>
 
-        <!-- FEATURED EXPERTISE  LATER UNCOMMENT FOR HOMME PAGGE
-        <div class="expertise-section">
-            <div class="expertise-grid">
-                <div class="expertise-visual">🖥️</div>
-                <div class="expertise-content">
-                    <h2>Featured <span>Expertise</span></h2>
-                    <p>Specializing in embedded firmware development on ARM Cortex-M4 — from zero-HAL bare-metal register programming to HAL-based multi-peripheral integration, CAN bus automotive protocols, and on-device TinyML inference.</p>
-                    <div class="feature-list">
-                        <div class="feature-item"><span>✓</span> Bare-Metal &amp; HAL Firmware — STM32 Nucleo F411RE, STM32F407 Discovery</div>
-                        <div class="feature-item"><span>✓</span> CAN Bus (ISO 11898) — MCP2551 Transceivers, Mailbox TX/RX, Filter Banks</div>
-                        <div class="feature-item"><span>✓</span> Multi-Protocol — UART, I2C, SPI, DMA, Timers, ADC, RTC, Watchdog</div>
-                        <div class="feature-item"><span>✓</span> FreeRTOS — Tasks, Semaphores, Queues, ISR-safe APIs (Learning)</div>
-                        <div class="feature-item"><span>✓</span> TinyML — TFLite Micro &amp; X-CUBE-AI on STM32F407</div>
-                    </div -->
-                </div>
-            </div>
-        </div>
     </div>
 
     <!-- ABOUT SECTION -->
@@ -870,18 +1011,22 @@ To build a career in Embedded Software Development by gaining practical experien
                     <h4>🎯 Personal Info</h4>
                     <p>
                         <strong>Name:</strong> Ajay <br>
-                        <strong>College:</strong> KPR Institute of Engineering &amp; Technology<br>
-                        <strong>Stream:</strong> B.E. ECE (2024–2028)<br>
+<strong>College:</strong>
+<a href="https://www.kpriet.ac.in" target="_blank" rel="noopener noreferrer">
+    KPR Institute of Engineering &amp; Technology
+</a><br>                        <strong>Stream:</strong> B.E. ECE (2024–2028)<br>
                         <strong>Place:</strong> Tiruppur, Tamil Nadu<br>
+
+                        <strong>Native Place:</strong> Madurai, Tamil Nadu<br>
                         
                     </p>
                 </div>
                 <div class="about-item">
                     <h4>📊 Academic Performance</h4>
                     <p>
-                        <strong>CGPA:</strong> 7.5 / 10<br>
-                        <strong>12th Grade:</strong> 84.16%<br>
-                        <strong>10th Grade:</strong> 75.8%<br>
+                        <strong>CGPA:</strong> 7.6 / 10<br>
+                        <strong>12th Grade:</strong> 84.16% (State Board)<br>
+                        <strong>10th Grade:</strong> 75.8%(State Board)<br>
                         <strong>Year:</strong> 3rd Year 5th Sem(Pursuing)
                     </p>
                 </div>
@@ -893,14 +1038,7 @@ To build a career in Embedded Software Development by gaining practical experien
                     
                     </p>
                 </div>
-                <div class="about-item">
-                    <h4>🚀 Target Roles</h4>
-                    <p>
-                        Actively seeking <strong>Embedded Software Internships</strong> at Tier-1 automotive companies.<br><br>
-                        <strong>Target:</strong> Bosch RBEI, Continental<br>
-                        <strong>Focus:</strong> Firmware, RTOS, CAN, AUTOSAR
-                    </p>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -922,15 +1060,12 @@ To build a career in Embedded Software Development by gaining practical experien
             </div>
             <div class="skill-card">
                 <div class="skill-icon">💻</div>
-                <h4>Programming Languages</h4>
+                <h4>Programming Languages / Software Development</h4>
                 <div class="skill-items">
-                    <span class="skill-tag"> Strong C </span>
+                    <span class="skill-tag">C</span>
                     <span class="skill-tag">HAL Programming</span>
-            
-                    <span class="skill-tag">Baremetal Programming</span>
-
-                    <span class="skill-tag">C++ (OOPS Basics)</span>
-                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Register level Programming</span>
+                    <span class="skill-tag">Rust & C++ (Basics)</span>
                 </div>
             </div>
             <div class="skill-card">
@@ -940,7 +1075,7 @@ To build a career in Embedded Software Development by gaining practical experien
                     <span class="skill-tag">RCC clock Tree</span>
                     <span class="skill-tag">Timers / PWM</span>
                     <span class="skill-tag">EXTI / Interrupts</span>
-                    <span class="skill-tag">ADC </span>
+                    <span class="skill-tag">ADC</span>
                     <span class="skill-tag">DAC</span>
                     <span class="skill-tag">DMA</span>
                     <span class="skill-tag">RTC</span>
@@ -948,8 +1083,8 @@ To build a career in Embedded Software Development by gaining practical experien
                     <span class="skill-tag">UART</span>
                     <span class="skill-tag">I2C</span>
                     <span class="skill-tag">SPI</span>
-                    <span class="skill-tag">CAN Bus</span>
-                    
+                    <span class="skill-tag">CAN Bus(2.0)</span>
+                    <span class="skill-tag">Ethernet</span>
                 </div>
             </div>
             <div class="skill-card">
@@ -961,7 +1096,6 @@ To build a career in Embedded Software Development by gaining practical experien
                     <span class="skill-tag">Synchronization</span>
                     <span class="skill-tag">RTOS Timers & Interrupts</span>
                     <span class="skill-tag">Memory Management</span>
-
                 </div>
             </div>
             <div class="skill-card">
@@ -979,9 +1113,10 @@ To build a career in Embedded Software Development by gaining practical experien
                 <div class="skill-icon">🔬</div>
                 <h4>Debugging &amp; Analysis</h4>
                 <div class="skill-items">
-                    <span class="skill-tag">ST-Link Debugger</span>
+                    <span class="skill-tag">ST-Link Debugger (V2)</span>
                     <span class="skill-tag">Logic Analyzer</span>
                     <span class="skill-tag">SWD / Live Expressions</span>
+                    <span class="skill-tag">Schematic Documents</span>
                     <span class="skill-tag">Errata Documents</span>
                     <span class="skill-tag">Datasheet Analysis</span>
                     <span class="skill-tag">Reference Manual</span>
@@ -1016,7 +1151,7 @@ To build a career in Embedded Software Development by gaining practical experien
         <!-- FOLDER VIEW — 3 professional engineering cards -->
         <div id="projectsFolderView" class="projects-view">
 
-            <!-- Firmware Development -->
+            <!-- Bare Metal Projects -->
             <div class="project-folder" onclick="openFolder('embedded')">
                 <div class="pf-top-bar"></div>
                 <div class="pf-body">
@@ -1029,11 +1164,11 @@ To build a career in Embedded Software Development by gaining practical experien
                             <path d="M12 18v2"/>
                         </svg>
                     </div>
-                    <div class="pf-category">Embedded Systems</div>
-                    <div class="folder-name">Firmware Development</div>
-                    <div class="folder-subtitle">HAL-based firmware & RTOS integration.</div>
+                    <div class="pf-category">STM32 Projects</div>
+                    <div class="folder-name">Bare Metal Projects</div>
+                    <div class="folder-subtitle">Robotic arm control, CAN bus (loopback/polling/interrupt), I2C/SPI peripherals, Ethernet — pure bare-metal HAL, no RTOS.</div>
                     <div class="pf-footer">
-                        <span class="folder-count">4 projects</span>
+                        <span class="folder-count">11 projects</span>
                         <div class="pf-arrow">
                             <svg viewBox="0 0 24 24">
                                 <path d="M5 12h14M13 6l6 6-6 6"/>
@@ -1043,8 +1178,8 @@ To build a career in Embedded Software Development by gaining practical experien
                 </div>
             </div>
 
-            <!-- Protocols & Hardware -->
-            <div class="project-folder" onclick="openFolder('protocols')">
+            <!-- FreeRTOS -->
+            <div class="project-folder" onclick="openFolder('freertos')">
                 <div class="pf-top-bar"></div>
                 <div class="pf-body">
                     <div class="pf-icon-wrap">
@@ -1057,11 +1192,11 @@ To build a career in Embedded Software Development by gaining practical experien
                             <path d="M7 12h5"/>
                         </svg>
                     </div>
-                    <div class="pf-category">Automotive &amp; Communication</div>
-                    <div class="folder-name">Protocols &amp; Hardware</div>
-                    <div class="folder-subtitle">CAN Bus (ISO 11898), UART, I2C, SPI, DMA — multi-protocol hardware integration, bus analysis, and automotive-grade validation.</div>
+                    <div class="pf-category">STM32 Projects</div>
+                    <div class="folder-name">FreeRTOS</div>
+                    <div class="folder-subtitle">Task-based CAN TX/RX, SPI→Ethernet webserver, and RTOS fundamentals — semaphores, ISR-safe APIs, task notifications.</div>
                     <div class="pf-footer">
-                        <span class="folder-count">3 projects</span>
+                        <span class="folder-count">4 projects</span>
                         <div class="pf-arrow">
                             <svg viewBox="0 0 24 24">
                                 <path d="M5 12h14M13 6l6 6-6 6"/>
@@ -1086,9 +1221,9 @@ To build a career in Embedded Software Development by gaining practical experien
                     </div>
                     <div class="pf-category">Edge AI &amp; Automation</div>
                     <div class="folder-name">AI &amp; Automation</div>
-                    <div class="folder-subtitle">TinyML inference on STM32 with TFLite Micro and X-CUBE-AI, model quantization, and Python-based workflow automation pipelines.</div>
+                    <div class="folder-subtitle">TinyML inference on STM32 with TFLite Micro and X-CUBE-AI, model quantization.</div>
                     <div class="pf-footer">
-                        <span class="folder-count">3 projects</span>
+                        <span class="folder-count">1 project</span>
                         <div class="pf-arrow">
                             <svg viewBox="0 0 24 24">
                                 <path d="M5 12h14M13 6l6 6-6 6"/>
@@ -1106,10 +1241,81 @@ To build a career in Embedded Software Development by gaining practical experien
             <div id="projectsList" class="project-list"></div>
         </div>
 
-        <!-- DETAIL VIEW -->
-        <div id="projectDetailView" style="display:none;">
-            <button class="btn-back" onclick="closeProject()">← Back to Projects</button>
-            <div id="projectDetail" class="project-detail"></div>
+    </div>
+
+    <!-- CERTIFICATIONS SECTION -->
+    <div id="certificationsContent" class="content-section">
+        <h2 class="section-title">My <span>Certifications</span></h2>
+        <div id="certsGrid" class="certs-grid"></div>
+    </div>
+
+    <!-- CERT LIGHTBOX (click a card to enlarge) -->
+    <div class="cert-lightbox" id="certLightbox" onclick="closeCertLightbox()">
+        <button class="cert-lightbox-close" onclick="closeCertLightbox(event)">✕</button>
+        <img id="certLightboxImg" src="" alt="Certificate">
+    </div>
+
+    <!-- RESOURCES SECTION -->
+    <div id="resourcesContent" class="content-section">
+        <h2 class="section-title">My <span>Resources</span></h2>
+        <!--
+          HOW TO LINK YOUR REAL FILES:
+          Replace each href="#" below with the actual file link, e.g.:
+            - Hosted URL:  href="https://drive.google.com/file/d/xxxx/view"
+            - GitHub raw:  href="https://raw.githubusercontent.com/aj-0/repo/main/docs/Nucleo_Reference_Manual.pdf"
+          Until then these are placeholders and won't open a real file.
+        -->
+        <div class="resources-box">
+            <a class="resource-item" href="https://www.st.com/resource/en/user_manual/um1724-stm32-nucleo64-boards-mb1136-stmicroelectronics.pdf" target="_blank" rel="noopener noreferrer">
+                <span class="resource-index">1</span>
+                <span class="resource-name">Nucleo Reference Manual.pdf</span>
+                <span class="resource-arrow">→</span>
+            </a>
+            <a class="resource-item" href="https://www.st.com/resource/en/user_manual/um1724-stm32-nucleo64-boards-mb1136-stmicroelectronics.pdf" target="_blank" rel="noopener noreferrer">
+                <span class="resource-index">2</span>
+                <span class="resource-name">Nucleo Pinout.pdf</span>
+                <span class="resource-arrow">→</span>
+            </a>
+            <a class="resource-item" href="https://www.st.com/resource/en/data_brief/nucleo-f411re.pdf" target="_blank" rel="noopener noreferrer">
+                <span class="resource-index">3</span>
+                <span class="resource-name">Nucleo Data Sheet.pdf</span>
+                <span class="resource-arrow">→</span>
+            </a>
+            <a class="resource-item" href="https://www.st.com/resource/en/user_manual/dm00154093-description-of-stm32f4-hal-and-lowlayer-drivers-stmicroelectronics.pdf" target="_blank" rel="noopener noreferrer">
+                <span class="resource-index">4</span>
+                <span class="resource-name">HAL Driver.pdf</span>
+                <span class="resource-arrow">→</span>
+            </a>
+            <a class="resource-item" href="https://www.freertos.org/Documentation/RTOS_book.html" target="_blank" rel="noopener noreferrer">
+                <span class="resource-index">5</span>
+                <span class="resource-name">FreeRTOS Reference Manual V10.0.0.pdf</span>
+                <span class="resource-arrow">→</span>
+            </a>
+            <a class="resource-item" href="https://developer.arm.com/documentation/dui0553/latest" target="_blank" rel="noopener noreferrer">
+                <span class="resource-index">6</span>
+                <span class="resource-name">ARM Cortex M4 Guide.pdf</span>
+                <span class="resource-arrow">→</span>
+            </a>
+            <a class="resource-item" href="https://www.st.com/resource/en/user_manual/dm00039084-stm32f4discovery-stmicroelectronics.pdf" target="_blank" rel="noopener noreferrer">
+                <span class="resource-index">7</span>
+                <span class="resource-name">Discovery User Manual.pdf</span>
+                <span class="resource-arrow">→</span>
+            </a>
+            <a class="resource-item" href="https://www.st.com/resource/en/schematic_pack/mb997-f407vgt6-b01_schematic.pdf" target="_blank" rel="noopener noreferrer">
+                <span class="resource-index">8</span>
+                <span class="resource-name">Discovery Schematic.pdf</span>
+                <span class="resource-arrow">→</span>
+            </a>
+            <a class="resource-item" href="https://www.st.com/resource/en/reference_manual/dm00031020-stm32f405415-stm32f407417-stm32f427437-and-stm32f429439-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" target="_blank" rel="noopener noreferrer">
+                <span class="resource-index">9</span>
+                <span class="resource-name">Discovery Reference.pdf</span>
+                <span class="resource-arrow">→</span>
+            </a>
+            <a class="resource-item" href="https://www.st.com/resource/en/datasheet/stm32f407vg.pdf" target="_blank" rel="noopener noreferrer">
+                <span class="resource-index">10</span>
+                <span class="resource-name">Discovery Data Sheet.pdf</span>
+                <span class="resource-arrow">→</span>
+            </a>
         </div>
     </div>
 
@@ -1138,112 +1344,220 @@ To build a career in Embedded Software Development by gaining practical experien
 
     <script>
         // ===== PROJECTS DATA =====
-        // HOW TO CHANGE IMAGES LATER:
-        // Each project has an `img` field. Replace the URL with:
-        //   - A hosted URL:  img: 'https://i.ibb.co/yourimage.jpg'
-        //   - A local file:  img: 'images/robotic-arm.jpg'  (put the file in the same folder as this HTML)
-        //   - A GitHub raw:  img: 'https://raw.githubusercontent.com/aj-0/repo/main/imgs/project.jpg'
-        // The image will fill the card header (object-fit: cover, 180px tall on list, 240px on detail).
-        // Recommended image size: 800×450px (16:9 ratio works best).
-
+        // Each project's `url` points to its EXACT folder on GitHub — clicking a card
+        // opens that repo/subfolder directly in a new tab (no in-site detail page).
+        // HOW TO SWAP IMAGES: replace `img` with a hosted URL, a local file (images/xyz.jpg),
+        // or (once you commit screenshots into the repo itself) a permanent link like:
+        //   https://raw.githubusercontent.com/aj-0/<repo>/main/<path-to-image>
+        // Demo placeholders are used below until real screenshots are committed to the repos.
+        //
+        // ORGANIZATION RULE:
+        //  - "embedded" (Bare Metal Projects) = everything NOT using FreeRTOS and NOT AI/TinyML
+        //  - "freertos" = ONLY projects that actually run under FreeRTOS tasks/scheduler
+        //  - "ai" = Edge AI / TinyML only
         const projectsData = {
             embedded: [
                 {
                     id: 'e1',
-                    img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80',
-                    // ↑ CHANGE THIS — your robotic arm project photo
+                    img: 'https://github.com/user-attachments/assets/1f93de42-c650-40ee-b934-581321ac7240',
                     title: '5-DOF Robotic Arm',
-                    caption: 'Real-time controlled robotic arm — STM32 + ESP32',
-                    details: 'Designed and implemented a real-time controlled robotic arm system. Architecture: Mobile App (Wi-Fi) → ESP32 (UART bridge) → STM32 F411RE (PWM generation) → 5× Servo Motors. Optimized servo actuation precision and minimized command latency across the full communication stack.',
-                    tech: ['STM32F411RE', 'ESP32', 'UART', 'PWM', 'Wi-Fi', 'C']
-                },
-                {
-                    id: 'e2',
-                    img: 'https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=800&q=80',
-                    // ↑ CHANGE THIS — bare-metal / register programming screenshot or board photo
-                    title: 'Bare-Metal Programming Suite',
-                    caption: 'Zero-HAL register-level firmware on STM32 Nucleo F411RE',
-                    details: 'Programmed user-input LED control using external interrupts (EXTI) at register level. Generated PWM signals using Timer registers with pure bare-metal implementation — no HAL dependency. Also implemented CAN1 loopback covering RCC/PLL, FLASH latency, GPIO AF, CAN1 BTR, filter banks, and TX/RX via mailbox registers.',
-                    tech: ['STM32F411RE', 'Bare-Metal C', 'EXTI', 'Timers/PWM', 'CAN1 Mailbox', 'RCC/PLL', 'GPIO AF']
-                },
-                {
-                    id: 'e3',
-                    img: 'https://images.unsplash.com/photo-1591488320449-011701bb6704?w=800&q=80',
-                    // ↑ CHANGE THIS — FreeRTOS task diagram or CubeIDE screenshot
-                    title: 'FreeRTOS on STM32 (In Progress)',
-                    caption: 'Migrated from CMSIS-RTOS v2 to native FreeRTOS APIs',
-                    details: 'Actively learning FreeRTOS on STM32 Nucleo F411RE. Migrated from CMSIS-RTOS v2 wrappers to native FreeRTOS API in STM32CubeIDE. Building expertise in: binary semaphores (xSemaphoreGiveFromISR / xSemaphoreTake), ISR-safe API patterns, vTaskDelay vs vTaskDelayUntil, task synchronization, and NVIC priority rules (must be ≥5 for ISR-calling FreeRTOS APIs).',
-                    tech: ['FreeRTOS', 'STM32F411RE', 'STM32CubeIDE', 'Binary Semaphores', 'Queues', 'ISR-safe APIs', 'NVIC']
+                    caption: 'Mobile App → ESP32 (UART) → STM32 F411RE (PWM) → Servos',
+                    tech: ['STM32F411RE', 'ESP32', 'UART', 'PWM'],
+                    url: 'https://github.com/aj-0/4-Dof-Robotic-ARM-Using-STM32'
                 },
                 {
                     id: 'e4',
-                    img: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
-                    // ↑ CHANGE THIS — Ethernet/networking hardware photo
-                    title: 'Ethernet in Embedded Systems (Learning)',
-                    caption: 'Exploring MAC/PHY, frame structure and network communication on MCUs',
-                    details: 'Currently learning Ethernet communication in embedded systems — including hardware-level working mechanisms, protocol architecture, and layered communication models. Exploring Ethernet MAC/PHY interaction, frame structure, data flow, and network-based communication on microcontrollers.',
-                    tech: ['Ethernet MAC/PHY', 'Frame Structure', 'Network Protocols', 'Embedded C', 'Active Learning']
-                }
-            ],
-            protocols: [
+                    img: 'https://github.com/user-attachments/assets/a538bc55-2f39-4900-b84d-0d1f3a99ab69',
+                    title: 'SPI → Ethernet Ping Test',
+                    caption: 'W5500 static-IP ping test on STM32F407',
+                    tech: ['W5500', 'SPI', 'Bare-Metal C', 'Ethernet'],
+                     url: 'https://github.com/aj-0/STM32_Interfacing/tree/main/Spi_to_Ethernet_ping'
+                },
                 {
                     id: 'p1',
-                    img: 'https://images.unsplash.com/photo-1601132359864-c974e79890ac?w=800&q=80',
-                    // ↑ CHANGE THIS — CAN bus wiring / oscilloscope capture photo
-                    title: 'CAN Protocol Projects',
-                    caption: 'CAN loopback + CAN1↔CAN2 inter-node on STM32F407',
-                    details: 'Two-part CAN project: (1) CAN internal loopback testing on STM32F407 Discovery for self-diagnostic validation of CAN frame transmission and reception. (2) Real-time CAN1↔CAN2 communication between two STM32 nodes using dual MCP2551 CAN transceivers on a shared bus with 120Ω termination — configured CAN bit timing, filter banks (via hcan1), TX/RX mailboxes, and interrupt-based message handling. Debugged HSE bypass→crystal issue, prescaler/TimeSeg values, and MCP2551 voltage compatibility.',
-                    tech: ['STM32F407', 'CAN Bus', 'MCP2551', 'ISO 11898', 'Bare-Metal C', 'Interrupt Mailbox', '120Ω Termination']
+                    img: 'https://github.com/user-attachments/assets/93ec8c0e-f855-4198-a89a-4b24f6e58dee',
+                    title: 'CAN Bus — Loopback Self-Test',
+                    caption: 'Internal CAN loopback for TX/RX self-diagnostic validation',
+                    tech: ['STM32F407', 'CAN', 'Loopback'],
+                    url: 'https://github.com/aj-0/CAN-Bus-Projects/tree/main/Can_Loopback'
                 },
                 {
                     id: 'p2',
-                    img: 'https://images.unsplash.com/photo-1573164713714-d95e436ab8d4?w=800&q=80',
-                    // ↑ CHANGE THIS — breadboard with modules (MPU6050 / LoRa / GSM)
-                    title: 'Multi-Protocol Communication Engine',
-                    caption: 'UART · I2C · SPI — real hardware integration and benchmarking',
-                    details: 'Implemented and verified UART, I2C, and SPI communication protocols with comparative analysis of transmission speeds and operational efficiency. Integrated hardware components: MPU6050 Gyroscope (I2C), GSM 800L Modem (UART), and LoRa SX1278 Transceiver (SPI). Demonstrated multi-protocol hardware compatibility and protocol performance evaluation across all three buses.',
-                    tech: ['UART', 'I2C', 'SPI', 'MPU6050', 'GSM 800L', 'LoRa SX1278', 'STM32', 'HAL']
+                    img: 'https://github.com/user-attachments/assets/59cdc9cd-e8e5-474f-9f6d-47ca57fb574b',
+                    title: 'CAN Bus — TX (Interrupt)',
+                    caption: 'Periodic CAN frame TX via MCP2551, interrupt-driven',
+                    tech: ['CAN', 'MCP2551', 'Interrupt'],
+                    url: 'https://github.com/aj-0/CAN-Bus-Projects/tree/main/CAN%20Bus_Tx_INT'
                 },
                 {
                     id: 'p3',
-                    img: 'https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=800&q=80',
-                    // ↑ CHANGE THIS — oscilloscope / logic analyzer capture
-                    title: 'Peripheral Deep-Dives',
-                    caption: 'DMA, ADC, RTC, Watchdog — hands-on peripheral integration',
-                    details: 'Hands-on exploration and implementation of key STM32 peripherals including DMA for memory-to-peripheral transfers, ADC for analog signal acquisition, RTC for timekeeping, and Watchdog for firmware reliability. All implemented with a focus on peripheral workflows, low-level hardware operation, and power optimization.',
-                    tech: ['DMA', 'ADC', 'RTC', 'Watchdog', 'STM32', 'HAL', 'Bare-Metal C', 'Power Optimization']
+                    img: 'https://github.com/user-attachments/assets/59cdc9cd-e8e5-474f-9f6d-47ca57fb574b',
+                    title: 'CAN Bus — RX (Interrupt)',
+                    caption: 'RX FIFO0 message-pending callback, mailbox-based reception',
+                    tech: ['CAN', 'RX FIFO0', 'HAL'],
+                    url: 'https://github.com/aj-0/CAN-Bus-Projects/tree/main/CAN%20Bus%20Rx_INT'
+                },
+                {
+                    id: 'p4',
+                    img: 'https://github.com/user-attachments/assets/173f91cc-5ea7-4454-b6c2-b229d9559677',
+                    title: 'CAN Bus — Polling Mode',
+                    caption: 'CAN TX/RX without interrupts, polled mailbox status',
+                    tech: ['CAN', 'Polling', 'STM32'],
+                    url: 'https://github.com/aj-0/CAN-Bus-Projects/tree/main/CAN%20Bus_Polling'
+                },
+                {
+                    id: 'p7',
+                    img: 'https://github.com/user-attachments/assets/07d0a7e3-f35d-4604-ae80-6dfdc40541c9',
+                    title: 'MPU6050 — I2C Gyroscope',
+                    caption: 'Accelerometer/gyro data acquisition over I2C',
+                    tech: ['I2C', 'MPU6050', 'STM32'],
+                    url: 'https://github.com/aj-0/STM32_Interfacing/tree/main/MPU6050_I2C'
+                },
+                {
+                    id: 'p8',
+                    img: 'https://github.com/user-attachments/assets/f10d19e4-fc26-4810-a69b-a28e5e5cd5dd',
+                    title: '16x2 LCD via PCF8574 (I2C)',
+                    caption: 'I2C LCD driver with centered-text helper, PB6/PB7 @ 0x27',
+                    tech: ['I2C', 'PCF8574', 'LCD'],
+                    url: 'https://github.com/aj-0/STM32_Interfacing/tree/main/16x2_lcd_pcf8574'
+                },
+                {
+                    id: 'p9',
+                    img: 'https://github.com/user-attachments/assets/ab830209-ee07-46c6-b99c-51aa9987251b',
+                    title: 'SD Card Logging (FatFs)',
+                    caption: 'FatFs write logging over SPI, debugged silent write failure',
+                    tech: ['FatFs', 'SPI', 'SD Card'],
+                    url: 'https://github.com/aj-0/STM32_Interfacing/tree/main/SDcard-interfacing-Testing-'
+                },
+                {
+                    id: 'p10',
+                    img: 'https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=800&q=80',
+                    title: 'DC Motor Speed Control',
+                    caption: 'PWM-based DC motor speed control via Timers',
+                    tech: ['PWM', 'Timers', 'DC Motor'],
+                    url: 'https://github.com/aj-0/STM32_Interfacing/tree/main/DC%20Motor%20Speed%20Control'
+                },
+                {
+                    id: 'p11',
+                    img: 'https://images.unsplash.com/photo-1601132359864-c974e79890ac?w=800&q=80',
+                    title: 'LED Breathing (PWM)',
+                    caption: 'Smooth LED fade via duty-cycle sweep on Timer PWM',
+                    tech: ['PWM', 'Timers', 'GPIO'],
+                    url: 'https://github.com/aj-0/STM32_Interfacing/tree/main/LEDBreathing%20using%20PWM'
+                }
+            ],
+            freertos: [
+                {
+                    id: 'e2',
+                    img: 'https://images.unsplash.com/photo-1591488320449-011701bb6704?w=800&q=80',
+                    title: 'FreeRTOS Fundamentals',
+                    caption: 'Native FreeRTOS APIs — tasks, semaphores, ISR-safe patterns',
+                    tech: ['FreeRTOS', 'STM32', 'Semaphores'],
+                    url: 'https://github.com/aj-0/FreeRTOS/tree/main/Basic-FreeRTOS'
+                },
+                {
+                    id: 'e3',
+                    img: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
+                    title: 'SPI→Ethernet Webserver (FreeRTOS)',
+                    caption: 'W5500 over SPI, ioLibrary_Driver, served from a FreeRTOS task',
+                    tech: ['W5500', 'SPI', 'FreeRTOS', 'Ethernet'],
+                    url: 'https://github.com/aj-0/FreeRTOS/tree/main/Spi_to_Ethernet_Webserver'
+                },
+                {
+                    id: 'p5',
+                    img: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&q=80',
+                    title: 'CAN Bus TX — FreeRTOS Task',
+                    caption: 'CAN transmission wrapped in a dedicated FreeRTOS task',
+                    tech: ['CAN', 'FreeRTOS', 'Tasks'],
+                    url: 'https://github.com/aj-0/FreeRTOS/tree/main/CAN%20Bus_Freertos_Tx'
+                },
+                {
+                    id: 'p6',
+                    img: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80',
+                    title: 'CAN Bus RX — FreeRTOS Task',
+                    caption: 'ISR-to-task signaling for CAN reception via binary semaphore',
+                    tech: ['CAN', 'FreeRTOS', 'ISR-safe API'],
+                    url: 'https://github.com/aj-0/FreeRTOS/tree/main/CANBUS_Freertos_Rx'
                 }
             ],
             ai: [
                 {
                     id: 'a1',
                     img: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80',
-                    // ↑ CHANGE THIS — TFLite Micro output / UART terminal screenshot
-                    title: 'TinyML on STM32F407',
-                    caption: 'Sine-wave prediction — TFLite Micro deployed on STM32F407',
-                    details: 'Developed a TinyML-based sine-wave prediction application on STM32F407 Discovery using TensorFlow Lite Micro and X-CUBE-AI. Pipeline: Python model training → quantization → TFLite conversion → C header array → deployed to STM32F407 with tensor arena in CCMRAM. UART output at 115200 baud. Debugged X-CUBE-AI wrapper issues and undefined ai_input/ai_output globals.',
-                    tech: ['TFLite Micro', 'X-CUBE-AI', 'STM32F407', 'CCMRAM', 'Python', 'Model Quantization', 'UART 115200']
-                },
-                {
-                    id: 'a2',
-                    img: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&q=80',
-                    // ↑ CHANGE THIS — Python script / automation workflow screenshot
-                    title: 'Python Automation & Bots',
-                    caption: 'Workflow automation scripts and bot development',
-                    details: 'Built Python-based automation scripts and bots for workflow optimization. Explored N8N workflow automation for connecting services and automating repetitive tasks. Developed practical understanding of automation pipelines and API integrations.',
-                    tech: ['Python', 'Bot Development', 'N8N Automation', 'API Integration', 'Workflow Scripts']
-                },
-                {
-                    id: 'a3',
-                    img: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80',
-                    // ↑ CHANGE THIS — internship / office / code photo
-                    title: 'System Software Internship — Appin Technology',
-                    caption: 'System-level C development and embedded tools',
-                    details: 'Strengthened C programming fundamentals through system-level development tasks and problem-solving exercises. Gained practical experience with embedded systems software tools and utilities. Developed understanding of software-hardware interaction and debugging methodologies.',
-                    tech: ['C Programming', 'System Software', 'Embedded Tools', 'Debugging', 'Software-Hardware Interaction']
+                    title: 'TinyML — Sine Wave Prediction',
+                    caption: 'TFLite Micro model deployed on STM32F407 via X-CUBE-AI',
+                    tech: ['TFLite Micro', 'X-CUBE-AI', 'CCMRAM'],
+                    url: 'https://github.com/aj-0/Tinyml-on-STM32-F407'
                 }
             ]
         };
+
+        // ===== CERTIFICATIONS DATA =====
+        // HOW TO ADD YOUR REAL CERTIFICATE IMAGES:
+        // Replace each `img` URL below with your own scanned/exported certificate image.
+        //   - Hosted URL:   img: 'https://i.ibb.co/yourcert.jpg'
+        //   - Local file:   img: 'images/certs/etalvis.jpg'  (put file next to this HTML)
+        //   - GitHub raw:   img: 'https://raw.githubusercontent.com/aj-0/repo/main/certs/etalvis.jpg'
+        // These are demo placeholder images — swap them out with your actual certificates.
+        const certsData = [
+            {
+                issuer: 'Etalvis Learning',
+                name: 'Electronics Foundation Course',
+                img: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=900&q=80'
+            },
+            {
+                issuer: 'NIELIT Calicut',
+                name: 'Embedded Systems for Beginners',
+                img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80'
+            },
+            {
+                issuer: 'Udemy',
+                name: 'ARM Cortex-M3 & M4 Programming',
+                img: 'https://images.unsplash.com/photo-1591488320449-011701bb6704?w=900&q=80'
+            },
+            {
+                issuer: 'Infineon Technologies',
+                name: 'Industrial, IoT & Consumer Microcontrollers',
+                img: 'https://images.unsplash.com/photo-1601132359864-c974e79890ac?w=900&q=80'
+            },
+            {
+                issuer: 'Udemy',
+                name: 'C & Python Programming',
+                img: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=900&q=80'
+            },
+            {
+                issuer: 'IIT Alumni — PALS Innowah Cluster',
+                name: 'PALS Innowah Cluster Finals (Competition Certificate)',
+                img: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&q=80'
+            }
+        ];
+
+        function renderCerts() {
+            const grid = document.getElementById('certsGrid');
+            if (!grid) return;
+            grid.innerHTML = certsData.map((c, i) => `
+                <div class="cert-card" onclick="openCertLightbox(${i})">
+                    <div class="cert-thumb">
+                        <img src="${c.img}" alt="${c.name}" loading="lazy" onerror="this.style.display='none'">
+                    </div>
+                    <div class="cert-body">
+                        <div class="cert-issuer">${c.issuer}</div>
+                        <div class="cert-name">${c.name}</div>
+                    </div>
+                </div>`).join('');
+        }
+
+        function openCertLightbox(index) {
+            const cert = certsData[index];
+            document.getElementById('certLightboxImg').src = cert.img;
+            document.getElementById('certLightboxImg').alt = cert.name;
+            document.getElementById('certLightbox').classList.add('active');
+        }
+
+        function closeCertLightbox(e) {
+            if (e) e.stopPropagation();
+            document.getElementById('certLightbox').classList.remove('active');
+        }
 
         // ===== CAROUSEL =====
         let currentSlide = 0;
@@ -1274,6 +1588,7 @@ To build a career in Embedded Software Development by gaining practical experien
                 carousel.addEventListener('mouseleave', startAutoplay);
             }
             startAutoplay();
+            renderCerts();
         });
 
         // ===== NAV =====
@@ -1294,7 +1609,6 @@ To build a career in Embedded Software Development by gaining practical experien
             if (contentName === 'projects') {
                 document.getElementById('projectsFolderView').style.display = 'grid';
                 document.getElementById('projectsListView').style.display = 'none';
-                document.getElementById('projectDetailView').style.display = 'none';
             }
             window.scrollTo(0, 0);
         }
@@ -1307,45 +1621,25 @@ To build a career in Embedded Software Development by gaining practical experien
             projectsList.innerHTML = '';
             projects.forEach(project => {
                 projectsList.innerHTML += `
-                    <div class="project-card" onclick="openProject('${folderName}', '${project.id}')">
+                    <div class="project-card" onclick="window.open('${project.url}', '_blank', 'noopener')">
                         <div class="project-image">
                             <img src="${project.img}" alt="${project.title}" loading="lazy" onerror="this.style.display='none'">
                         </div>
                         <div class="project-info">
                             <div class="project-title">${project.title}</div>
                             <div class="project-caption">${project.caption}</div>
+                            <div class="tech-list">${project.tech.map(t => `<span class="tech-badge">${t}</span>`).join('')}</div>
                         </div>
                     </div>`;
             });
             document.getElementById('projectsFolderView').style.display = 'none';
             document.getElementById('projectsListView').style.display = 'block';
-            document.getElementById('projectDetailView').style.display = 'none';
         }
 
         function closeFolder() {
             document.getElementById('projectsFolderView').style.display = 'grid';
             document.getElementById('projectsListView').style.display = 'none';
-            document.getElementById('projectDetailView').style.display = 'none';
         }
-
-        function openProject(folderName, projectId) {
-            const project = projectsData[folderName].find(p => p.id === projectId);
-            document.getElementById('projectDetail').innerHTML = `
-                <div class="project-detail-image">
-                    <img src="${project.img}" alt="${project.title}" loading="lazy" onerror="this.style.display='none'">
-                </div>
-                <h2>${project.title}</h2>
-                <p class="project-detail-text">${project.details}</p>
-                <div><strong>Technologies Used:</strong>
-                    <div class="tech-list">${project.tech.map(t => `<span class="tech-badge">${t}</span>`).join('')}</div>
-                </div>`;
-            document.getElementById('projectsFolderView').style.display = 'none';
-            document.getElementById('projectsListView').style.display = 'none';
-            document.getElementById('projectDetailView').style.display = 'block';
-            window.scrollTo(0, 0);
-        }
-
-        function closeProject() { closeFolder(); window.scrollTo(0, 0); }
     </script>
 </body>
 </html>
