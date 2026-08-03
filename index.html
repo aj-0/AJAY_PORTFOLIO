@@ -396,9 +396,11 @@
         }
 
         /* ===== CONTENT SECTIONS ===== */
-        .content-section { display: none; padding: 3rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .content-section { display: none; padding: 100px 2rem 3rem; max-width: 1200px; margin: 0 auto; }
         .content-section.active { display: block; animation: fadeIn 0.4s ease-in; }
-
+        @media (max-width: 768px) {
+    .content-section { padding-top: 140px; }
+}
         .section-title {
             font-size: 2.2rem;
             font-weight: 800;
@@ -411,8 +413,9 @@
         .section-title span { color: var(--primary); }
 
         /* Certifications sub-heading note (small + black, sits right under the title) */
-        #certificationsContent .section-title { margin-bottom: 0.5rem; }
-
+          /* Sub-heading note (small + black, sits right under the title) */
+#certificationsContent .section-title,
+#projectsContent .section-title { margin-bottom: 0.5rem; }
         .cert-note {
             text-align: center;
             font-size: 0.85rem;
@@ -1159,7 +1162,8 @@ To build a career in Embedded Software Development by gaining practical experien
 
     <!-- PROJECTS SECTION -->
     <div id="projectsContent" class="content-section">
-        <h2 class="section-title">My <span>Projects ( Under Development)</span></h2>
+        <h2 class="section-title">My <span>Projects</span></h2><p class="cert-note">(Click any project to view the source code and project details..)</p>
+
 
         <!-- FOLDER VIEW — 3 professional engineering cards -->
         <div id="projectsFolderView" class="projects-view">
